@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+    <title>Vanquish Quest</title>
+</html>
+<body>
+    <!--Game User Management Page-->
+    <h1 style="text-align: center">Vanquish Quest</h1>
+    <br>
+    <br>
+    <br>
+	<div id="Login" class = "row"  style="text-align: center" background=>
+		<h2>Login</h2>
+			<p>Username:  <input id = username type="text" name="username"></p>
+			<p>Password:  <input id = password type="password" name="password"></p>
+            <br>
+			<div class="col"  style="text-align:right"><button id="loginbtn" type = "submit" onclick="asyncLogin(username, password)">Log In</button></div>
+			<div class="col"  style="text-align: center"><button id="create">Create</button></div>
+    		<div class="col"  style="text-align: left"><button id="delete">Delete</button></div>
+		</form>
+		<br><br>
+    </div>
+
+    <!-- Navigation Menu -->
+    <div id="Nav" style = "display: none;">
+        <div class="col"  style="text-align: center"><button id="shopbtn">Shop</button></div>
+        <div class="col"  style="text-align: center"><button id="battlebtn">Battle</button></div>
+        <div class="col"  style="text-align: center"><button id="socialbtn">Social</button></div>
+    </div>
+
+    <!--Shop Pages-->
+    <div id= "Shop" style = "display: none;">
+        <div class="col"  style="text-align: center"><button id="weaponsbtn">Weapons</button></div>
+        <div class="col"  style="text-align: center"><button id="armorbtn">Armor</button></div>
+    </div>
+    <div id= "Weapons" style = "display: none;">
+        <div class="col"  style="text-align: center"><button id="armorbtn">Armor</button></div>
+    </div>
+    <div id= "Armor" style = "display: none;">
+        <div class="col"  style="text-align: center"><button id="weaponsbtn">Weapons</button></div>
+    </div>
+
+    <!--Battle Page-->
+    <div id="Battle" style = "display: none;">
+        <button type = "submit">Bunny Meadow</button>
+        <button type = "submit">Bonobo Jungle</button>
+        <button type = "submit">Dragon Valley</button>
+        <button type = "submit">Heal</button>
+    </div>
+
+    <!--Social Page-->
+    <div id="Social" style = "display: none;">
+        <a class = "item" href = "/friends">
+            Friends List
+        </a>
+        <a class = "item" href = "/messages">
+            Private Messages
+        </a>
+    </div>
+
+    <!--ChatBox-->
+    <div id = "ChtBtn"  style = "display: none; text-align: right">
+            <button id= "chatbtn" type ="submit">Open Chat</button>
+        </div>
+    <div id= "Chatbox" style = "display: block;"> 
+        
+        <div id="wrapper" style = "display: none; text-align: right">
+            <div id="menu">
+                <button type ="submit">Refresh</button>
+                <button id ="exitbtn" type = "submit">Exit Chat</a></p>
+            </div>
+ 
+            <div id="chatbox"></div>
+ 
+            <form name="message" action="">
+                <input name="message" type="text" id="message" />
+                <input name="character_id" type="submit" id="character_id" value="Send" />
+            </form>
+        </div>
+    
+    <!--JavaScript Call-->
+    <script src="app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+</body>
+</html>
