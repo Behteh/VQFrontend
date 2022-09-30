@@ -4,87 +4,196 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="Style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
     <title>Vanquish Quest</title>
 </html>
 <body>
-    <!--Game User Management Page-->
-    <h1 style="text-align: center">Vanquish Quest</h1>
-    <br>
-    <br>
-    <br>
-	<div id="Login" class = "row"  style="text-align: center" background=>
-		<h2>Login</h2>
-			<p>Username:  <input id = username type="text" name="username"></p>
-			<p>Password:  <input id = password type="password" name="password"></p>
-            <br>
-			<div class="col"  style="text-align:right"><button id="loginbtn" type = "submit" onclick="asyncLogin(username, password)">Log In</button></div>
-			<div class="col"  style="text-align: center"><button id="create">Create</button></div>
-    		<div class="col"  style="text-align: left"><button id="delete">Delete</button></div>
-		</form>
-		<br><br>
-    </div>
+	<h1 style="text-align: center">Vanquish Quest</h1>
 
-    <!-- Navigation Menu -->
-    <div id="Nav" style = "display: none;">
-        <div class="col"  style="text-align: center"><button id="shopbtn">Shop</button></div>
-        <div class="col"  style="text-align: center"><button id="battlebtn">Battle</button></div>
-        <div class="col"  style="text-align: center"><button id="socialbtn">Social</button></div>
-    </div>
+	<div id="centerBox">
+		
+		<!--Login Page-->
+		<div id="LoginPage">
+			<h2>Login</h2>
+			<p>Username:  <input type="text" id="LoginUsername" name="username"></p>
+			<p>Password:  <input type="password" id="LoginPassword" name="password"></p>
+			<button onClick="loginButton()">Log In</button>
+			<p id="LoginError" style="color:red; display:none;">There was an error logging you in</p>
+			<br><br>
+			<button onClick="switchCreateButton()">Create account</button>
+		</div>
 
-    <!--Shop Pages-->
-    <div id= "Shop" style = "display: none;">
-        <div class="col"  style="text-align: center"><button id="weaponsbtn">Weapons</button></div>
-        <div class="col"  style="text-align: center"><button id="armorbtn">Armor</button></div>
-    </div>
-    <div id= "Weapons" style = "display: none;">
-        <div class="col"  style="text-align: center"><button id="armorbtn">Armor</button></div>
-    </div>
-    <div id= "Armor" style = "display: none;">
-        <div class="col"  style="text-align: center"><button id="weaponsbtn">Weapons</button></div>
-    </div>
+		<!--Create Page-->
+		<div id="CreatePage">
+			<h2>Create Account</h2>
+			<p>Username:  <input type="text" id="CreateUsername" name="username"></p>
+			<p>Password:  <input type="password" id="CreatePass1" name="pass1"></p>
+			<p>Confirm Password:  <input type="password" id="CreatePass2" name="pass2"></p>
+			<button onClick="createButton()">Create</button>
+			<p id="CreateMismatch" style="color:red;">The passwords don't match</p>
+			<p id="CreateError" style="color:red;">There was an error creating your account</p>
+			<br><br>
+			<button onClick="switchLoginButton()">Switch to Log in</a>
+		</div>
 
-    <!--Battle Page-->
-    <div id="Battle" style = "display: none;">
-        <button type = "submit">Bunny Meadow</button>
-        <button type = "submit">Bonobo Jungle</button>
-        <button type = "submit">Dragon Valley</button>
-        <button type = "submit">Heal</button>
-    </div>
+		<!--Game Page-->
+		<div id="GamePage">
+			<h2>Inventory:</h2>
+			<p id="GameInvWeapon">Weapon: default</p>
+			<p id="GameInvArmor">Armor: default</p>
+			<p id="GameInvGold">Gold: default</p>
+			<p id="GameInvHealth">Health: default</p>
+			<hr>
+			<h2>Scavenge for Gold:</h2>
+ 			<div style="width:max-content; margin:auto; overflow:hidden;">
+				<button onClick="scavenge(1)">Bunny Meadows</button>
+				<button onClick="scavenge(2)">Ancient Cave</button>
+				<button onClick="scavenge(3)">Dragon Valley</button>
+			</div>
+			<br>
+			<hr>
+			<h2>Actions</h2>
+ 			<div style="width:max-content; margin:auto; overflow:hidden;">
+				<button onClick="shopButton()">Go to Shop</button>
+				<button onClick="battleButton()">Battle Enemies</button>
+				<button onClick="historyButton()">Battle History</button>
+				<button onClick="friendsButton()">Friends</button>
+ 			</div>
+			<br>
+			<hr>
+ 			<div style="width:max-content; margin:auto; overflow:hidden;">
+				<button onClick="logoutButton()">Log Out</button>
+				<button onClick="deleteButton()">Delete Account</button>
+			</div>
+		</div>
 
-    <!--Social Page-->
-    <div id="Social" style = "display: none;">
-        <a class = "item" href = "/friends">
-            Friends List
-        </a>
-        <a class = "item" href = "/messages">
-            Private Messages
-        </a>
-    </div>
 
-    <!--ChatBox-->
-    <div id = "ChtBtn"  style = "display: none; text-align: right">
-            <button id= "chatbtn" type ="submit">Open Chat</button>
+
+		<!--History Page-->
+		<div id="HistoryPage">
+			<h2>Battle History</h2>
+			<h3>Enemies you beat:</h3>
+			<div id="EnemiesBeatDiv">
+				<p>enemy1</p>
+				<p>enemy2</p>
+			</div>
+			<hr>
+			<h3>Enemies you lost to:</h3>
+			<div id="EnemiesLostDiv">
+				<p>enemy3</p>
+				<p>enemy4</p>
+			</div>
+			
+			<button onClick="gameHub()">Return</button>
+		</div>
+
+
+	
+		<!--Shop Page-->
+		<div id="ShopPage">
+			<h2>Shop</h2>
+			<p>Currently equipped gear will be sold for 80% value upon purchase</p>
+			<div class="btn-group" style="width: max-content; margin: auto;">
+				<button onClick="showWeapons()">Weapons</button>
+				<button onClick="showArmor()">Armor</button>
+				<button onClick="gameHub()">Back</button>
+			</div>
+			<div id="WeaponsDiv" style="">
+				<table id="WeaponsTable" style="table-layout: fixed; width: 100%;">
+					<tr><th>Weapon Name</th><th>Strength</th><th>Cost</th><th></th></tr>
+					<tr><td>DefaultWeapon</td><td>100</td><td>100</td><td><button>Buy</button></td></tr>
+				</table>
+			</div>
+			<div id="ArmorDiv" style="display:none;">
+				<table id="ArmorTable" style="table-layout: fixed; width: 100%;">
+					<tr><th>Armor Name</th><th>Defense</th><th>Cost</th><th></th></tr>
+					<tr><td>DefaultArmor</td><td>100</td><td>100</td><td><button>Buy</button></td></tr>
+				</table>
+			</div>
+		</div>
+
+
+	
+		<!--Battle Page-->
+		<div id="BattlePage">
+			<h2>Battle</h2>
+			<p id="BattleTopLine">You battled enemy_name:</p>
+			<table style="width:100%">
+				<tr>
+					<th><h3>Your stats:</h3></th>
+					<th><h3>Enemy stats:</h3></th>
+				</tr>
+				<tr>
+					<td id="PlayerStatsName">Name: player_name</td>
+					<td id="EnemyStatsName">Name: enemy_name (species)</td>
+				</tr>
+				<tr>
+					<td id="PlayerStatsHealth">Health: default</td>
+					<td id="EnemyStatsHealth">Health: default</td>
+				</tr>
+				<tr>
+					<td id="PlayerStatsWeapon">Weapon: default (Str: default)</td>
+					<td id="EnemyStatsWeapon">Weapon: default (Str: default)</td>
+				</tr>
+				<tr>
+					<td id="PlayerStatsArmor">Armor: default (Def: default)</td>
+					<td id="EnemyStatsArmor">Armor: default (Def: default)</td>
+				</tr>
+			</table>
+			<hr>
+			<p id="BattleStatus">You won this battle</p>
+			<button onClick="gameHub()">Return</button>
+		</div>
+
+
+
+		<!--Friends Page-->
+		<div id="FriendsPage">
+<div class="row">
+<div id="chatbox">
+    <div class="row">
+        <div id="chatHeader" class="border text-center">Chat</div>
+    </div>
+        <div class="row">
+            <div id="chatHeaderName" class="col-3 border">Name</div>
+            <div id="chatHeaderTime" class="col-3 border">Time</div>
+            <div id="chatHeaderMessage" class="col-6 border">Message</div>
         </div>
-    <div id= "Chatbox" style = "display: block;"> 
-        
-        <div id="wrapper" style = "display: none; text-align: right">
-            <div id="menu">
-                <button type ="submit">Refresh</button>
-                <button id ="exitbtn" type = "submit">Exit Chat</a></p>
-            </div>
- 
-            <div id="chatbox"></div>
- 
-            <form name="message" action="">
-                <input name="message" type="text" id="message" />
-                <input name="character_id" type="submit" id="character_id" value="Send" />
+        <div class="row">
+            <div id="chatMessages">Loading messages...</div>
+        </div>
+        <div class="row">
+            <form class="form">
+                <input type="hidden" name="userid" value="1" id="chatUserId" style="display: none">
+                <input id="messageSenderMessage" class="col-8" placeholder="Enter message">
+                </select>
+                <button type="button" id="messageSenderButton" class="col-3 btn btn-primary">Send Message</button>
             </form>
+                </div>
+        <div class="row">
+                <button type="button" id="reloadChatButton" class="col-2 btn btn-secondary">Reload Chat</button>
+            <div class="col-3"></div>
+            <div class="col-3">
+            <label for="textColorSelector">Text Color</label>
+                <select name="color" id="textColorSelector" onchange="reloadChat()">
+                </select>
+            </div>
+            <div class="col-3">
+                <label for="backgroundColorSelector">Background Color</label>
+                <select name="backgroundColor" id="backgroundColorSelector" onchange="reloadChat()">
+                </select>
+            </div>
         </div>
+    </div>
+</div>
+		</div>
+	</div>
     
     <!--JavaScript Call-->
-    <script src="app.js"></script>
+    <script src="ButtonFunctions.js"></script>
+    <script src="AppFunctions.js"></script>
+	<script src="chat.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
 </body>
