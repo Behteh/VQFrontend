@@ -4,37 +4,37 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="Style.css">
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
     <title>Vanquish Quest</title>
-</html>
-<body>
-	<h1 style="text-align: center">Vanquish Quest</h1>
+</head>
+<body style="background-color:black;">
+    <div class="row"><div  class="col-4"></div><img src = "VQ.gif" alt="Vanquish" title="Vanquish Quest" width="400" height="300" class="text-center col-4 rounded" id=vqtitle></div>
 
 	<div id="centerBox">
 		
 		<!--Login Page-->
 		<div id="LoginPage">
 			<h2>Login</h2>
-			<p>Username:  <input type="text" id="LoginUsername" name="username"></p>
-			<p>Password:  <input type="password" id="LoginPassword" name="password"></p>
-			<button onClick="loginButton()">Log In</button>
+			<p>Username:  <input type="text" id="LoginUsername" name="username" title="Username"></p>
+			<p>Password:  <input type="password" id="LoginPassword" name="password" title="Password"></p>
+			<button onClick="loginButton()" title="Login Submit Button">Log In</button>
 			<p id="LoginError" style="color:red; display:none;">There was an error logging you in</p>
 			<br><br>
-			<button onClick="switchCreateButton()">Create account</button>
+			<button onClick="switchCreateButton()" title="Create Account">Create account</button>
 		</div>
 
 		<!--Create Page-->
 		<div id="CreatePage">
 			<h2>Create Account</h2>
-			<p>Username:  <input type="text" id="CreateUsername" name="username"></p>
-			<p>Password:  <input type="password" id="CreatePass1" name="pass1"></p>
-			<p>Confirm Password:  <input type="password" id="CreatePass2" name="pass2"></p>
-			<button onClick="createButton()">Create</button>
+			<p>Username:  <input type="text" id="CreateUsername" name="username" title="Username"></p>
+			<p>Password:  <input type="password" id="CreatePass1" name="pass1" title="Password"></p>
+			<p>Confirm Password:  <input type="password" id="CreatePass2" name="pass2" title="Password Confirmation"></p>
+			<button onClick="createButton()" title="Create Account Submit Button">Create</button>
 			<p id="CreateMismatch" style="color:red;">The passwords don't match</p>
 			<p id="CreateError" style="color:red;">There was an error creating your account</p>
 			<br><br>
-			<button onClick="switchLoginButton()">Switch to Log in</a>
+			<button onClick="switchLoginButton()" title="Back To Login">Switch to Log in</button>
 		</div>
 
 		<!--Game Page-->
@@ -47,28 +47,72 @@
 			<hr>
 			<h2>Scavenge for Gold:</h2>
  			<div style="width:max-content; margin:auto; overflow:hidden;">
-				<button onClick="scavenge(1)">Bunny Meadows</button>
-				<button onClick="scavenge(2)">Ancient Cave</button>
-				<button onClick="scavenge(3)">Dragon Valley</button>
+				<button onClick="scavenge(1)" title="Bunny Meadows Scavenge">Bunny Meadows</button>
+				<button onClick="scavenge(2)" title="Ancient Cave Scavenge">Ancient Cave</button>
+				<button onClick="scavenge(3)" title="Dragon Valley Scavenge">Dragon Valley</button>
 			</div>
+			<div id="scavengeError" style="color: red; display: none">You must have at least 1 Health to scavenge.</div>
 			<br>
 			<hr>
 			<h2>Actions</h2>
  			<div style="width:max-content; margin:auto; overflow:hidden;">
-				<button onClick="shopButton()">Go to Shop</button>
-				<button onClick="battleButton()">Battle Enemies</button>
-				<button onClick="historyButton()">Battle History</button>
-				<button onClick="friendsButton()">Friends</button>
- 			</div>
+				<button onClick="shopButton()" title="Go to shop">Go to Shop</button>
+				<button onClick="battleButton()" title="Battle Enemies">Battle Enemies</button>
+				<button onClick="historyButton()" title="Battle History">Battle History</button>
+				<button onClick="friendsButton()" title="Friends">Friends</button>
+				<button onClick="chatButton()" title="Chat">Chat</button>
+				<br>
+				<br>
+				<button onclick="campButton()" title="Restores your characters health">Camp</button>
+				<button onclick="viewCharacterWeaponsButton()">View Weapons</button>
+				<button onclick="viewCharacterArmorsButton()">View Armors</button>
+				<button onclick="adminButton()">Admin</button>
+				<div style="color: red; display: none" id="AdminNoPermission">You do not have permission to access the admin panel</div>
+			</div>
 			<br>
 			<hr>
  			<div style="width:max-content; margin:auto; overflow:hidden;">
-				<button onClick="logoutButton()">Log Out</button>
-				<button onClick="deleteButton()">Delete Account</button>
+				<button onClick="logoutButton()" title="Logout Button">Log Out</button>
+				<button onClick="deleteButton()" title="Delete Account">Delete Account</button>
 			</div>
 		</div>
 
+		<!-- Character Weapons Page -->
+		<div id="CharacterWeaponsPage">
+			<h2>Character Weapons</h2>
+			<table id="CharacterWeaponTable" style="table-layout: fixed; width: 100%">
+				<tr>
+					<th>ID</th>
+					<th>Name</th>
+					<th>Strength</th>
+					<th>Equip</th>
+				</tr>
+			</table>
+			<button onclick="gameHub()">Back</button>
+		</div>
 
+		<!-- Character Armors Page -->
+		<div id="CharacterArmorsPage">
+			<h2>Character Armors</h2>
+			<table id="CharacterArmorTable" style="table-layout: fixed; width: 100%">
+				<tr>
+					<th>ID</th>
+					<th>Name</th>
+					<th>Defense</th>
+					<th>Equip</th>
+				</tr>
+			</table>
+			<button onclick="gameHub()">Back</button>
+		</div>
+
+		<!-- Admin Page -->
+		<div id="AdminPage">
+			<h2>Admin Page</h2>
+			<div id="AdminPageContent">
+				Placeholder
+			</div>
+			<button onclick="gameHub()">Back</button>
+		</div>
 
 		<!--History Page-->
 		<div id="HistoryPage">
@@ -88,21 +132,31 @@
 			<button onClick="gameHub()">Return</button>
 		</div>
 
-
 	
 		<!--Shop Page-->
 		<div id="ShopPage">
 			<h2>Shop</h2>
 			<p>Currently equipped gear will be sold for 80% value upon purchase</p>
+			<p id="ShopCoinDisplay">Your coins: 0</p>
+			<p id="ShopPriceError" style="color: red; display: none;">You don't have enough money to purchase this</p>
 			<div class="btn-group" style="width: max-content; margin: auto;">
-				<button onClick="showWeapons()">Weapons</button>
-				<button onClick="showArmor()">Armor</button>
-				<button onClick="gameHub()">Back</button>
+				<button onClick="showWeapons()" title="Weapons">Weapons</button>
+				<button onClick="showArmor()" title="Armor">Armor</button>
+				<button onClick="gameHub()" title="Leave Shop">Back</button>
 			</div>
-			<div id="WeaponsDiv" style="">
+			<div id="WeaponsDiv">
 				<table id="WeaponsTable" style="table-layout: fixed; width: 100%;">
-					<tr><th>Weapon Name</th><th>Strength</th><th>Cost</th><th></th></tr>
-					<tr><td>DefaultWeapon</td><td>100</td><td>100</td><td><button>Buy</button></td></tr>
+					<tr>
+						<th>Weapon Name</th>
+						<th>Strength</th>
+						<th colspan="2">Cost</th>
+					</tr>
+					<tr>
+						<td>DefaultWeapon</td>
+						<td>100</td>
+						<td>100</td>
+						<td><button>Buy</button></td>
+					</tr>
 				</table>
 			</div>
 			<div id="ArmorDiv" style="display:none;">
@@ -147,9 +201,30 @@
 		</div>
 
 
-
 		<!--Friends Page-->
 		<div id="FriendsPage">
+			<h2>My Friends:</h2>
+			<table id="FriendsTable" style="width:100%">
+				<tr><td>Friend1</td><td><button>Un-friend</button></td></tr>
+				<tr><td>Friend2</td><td><button>Un-friend</button></td></tr>
+			</table>
+			<hr>
+			<h2>My Requests:</h2>
+			<table id="FriendRequestTable" style="width:100%">
+				<tr><td>FriendReq1</td><td><button>Accept</button></td><td><button>Deny</button></td></tr>
+				<tr><td>FriendReq2</td><td><button>Accept</button></td><td><button>Deny</button></td></tr>
+			</table>
+			<hr>
+			<h2>Add Friend:</h2>
+			<p>id: <input id="friendAddField" type="text"></input>   <button onClick="sendFriendRequest()">Add</button></p>
+			<p id="friendPageID">My id: 5</p>
+			<hr>
+			<button onClick="gameHub()">Return</button>
+		</div>
+
+
+		<!--Chat Page-->
+		<div id="ChatPage">
 <div class="row">
 <div id="chatbox">
     <div class="row">
@@ -167,7 +242,6 @@
             <form class="form">
                 <input type="hidden" name="userid" value="1" id="chatUserId" style="display: none">
                 <input id="messageSenderMessage" class="col-8" placeholder="Enter message">
-                </select>
                 <button type="button" id="messageSenderButton" class="col-3 btn btn-primary">Send Message</button>
             </form>
                 </div>
@@ -187,6 +261,7 @@
         </div>
     </div>
 </div>
+			<button onClick="gameHub()">Return</button>
 		</div>
 	</div>
     
