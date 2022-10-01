@@ -1,3 +1,6 @@
+var stored_char;
+var stored_user;
+
 function hideElem(name){
 	document.getElementById(name).style.display="none";
 }
@@ -15,6 +18,10 @@ function hideAll(){
 	hideElem("ShopPage");
 	hideElem("HistoryPage");
 	hideElem("BattlePage");
+	hideElem("ChatPage");
+	hideElem("CharacterWeaponsPage");
+	hideElem("CharacterArmorsPage");
+	hideElem("AdminPage");
 }
 function setPage(name){
 	//Not needed but slightly convenient
@@ -44,6 +51,22 @@ function loginButton(){
 
 	loginUser(username, password);
 }
+
+async function adminButton()
+{
+	let userinfo = await getUserById(user_id);
+	if(!userinfo.admin)
+	{
+		console.error("You do not have permission to access this resource.");
+		document.getElementById("AdminNoPermission").style.display = "block";
+	}
+	else
+	{
+		console.log("You are clear to enter the admin panel");
+		setPage("AdminPage");
+	}
+}
+
 function switchLoginButton(){
 	hideElem("LoginError");
 	document.getElementById("LoginUsername").value = "";
@@ -62,10 +85,44 @@ function gameHub(){
 	fillGamePage();
 }
 function scavenge(difficulty){
-	//Difficulty is 1/2/3
-	//Scavenging logic
-	//Use updateChar() to update values
-	//This should also update the game page
+	// Do nothing if health is 0
+	if(stored_char.health <= 0)
+	{
+		document.getElementById("scavengeError").style.display = "block";
+		console.log("Can't scavenge with zero health.");
+	}
+	else
+	{
+		document.getElementById("scavengeError").style.display = "none";
+		//Difficulty is 1/2/3
+		if (difficulty === 1)
+		{
+			stored_char.gold += Math.floor(Math.random() * 10);
+		}
+		else if (difficulty === 2)
+		{
+			stored_char.health -= Math.floor(Math.random() * 10);
+			stored_char.gold += Math.floor(Math.random() * 20);
+		}
+		else if (difficulty === 3)
+		{
+			stored_char.health -= Math.floor(Math.random() * 20);
+			stored_char.gold += Math.floor(Math.random() * 50);
+		}
+		if(stored_char.health < 0)
+		{
+			stored_char.health = 0;
+		}
+		document.getElementById("GameInvGold").innerText = "Gold: " + stored_char.gold;
+		document.getElementById("GameInvHealth").innerText = "Health: " + stored_char.health;
+		updateChar().then((res) => console.log("Completed scavenge action"));
+	}
+}
+function campButton()
+{
+	stored_char.health = 100;
+	document.getElementById("GameInvHealth").innerText = "Health: " + stored_char.health;
+	updateChar().then((res) => console.log("camping to restore hp."));
 }
 function shopButton(){
 	fillShopPage();
@@ -79,8 +136,11 @@ function historyButton(){
 function friendsButton(){
 	fillFriendsPage();
 }
+function chatButton(){
+	setPage("ChatPage");
+}
 function deleteButton(){
-	switchLoginButton();
+	deleteChar();
 }
 function logoutButton(){
 	switchLoginButton();
@@ -92,4 +152,20 @@ function showWeapons(){
 function showArmor(){
 	hideElem("WeaponsDiv");
 	showElem("ArmorDiv");
+}
+
+function viewCharacterWeaponsButton()
+{
+	fillCharacterWeaponsPage();
+}
+
+function viewCharacterArmorsButton()
+{
+	fillCharacterArmorsPage();
+}
+
+function InventoryButton()
+{
+	displayCharacterWeapons();
+	displayCharacterArmors();
 }
